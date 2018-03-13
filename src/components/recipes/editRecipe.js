@@ -33,6 +33,17 @@ class EditRecipe extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(JSON.stringify(this.props.recipeTitle) !== JSON.stringify(nextProps.recipeTitle)){
+      this.setState({
+        recipeTitle: nextProps.recipeTitle,
+        recipeDirections: nextProps.recipeDirections,
+        ings: nextProps.recipeIngs,
+        numberOfIngs: nextProps.recipeIngs.length
+      })
+    }
+  }
+
   handleAddIng = () => {
 		this.setState((prevState) => ({
       numberOfIngs: prevState.numberOfIngs+1,

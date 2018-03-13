@@ -1,13 +1,13 @@
 import React from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import { Switch, Route } from 'react-router-dom'
 import Login from './components/auth/login/login.js'
 import Register from './components/auth/register/register.js'
 import Categories from './components/categories.js'
 import RecipePage from './components/recipes/recipePage.js'
 
 const Paths = () => (
-  <paths>
+  <BrowserRouter>
     <Switch>
       <Route exact path='/' component={Login}/>
       <Route exact path='/login' component={Login}/>
@@ -15,7 +15,7 @@ const Paths = () => (
       <Route exact path='/categories' component={Categories}/>
       <Route exact path='/:id/recipes' component={RecipePage}/>
     </Switch>
-  </paths>
+  </BrowserRouter>
 )
 
 export default Paths;

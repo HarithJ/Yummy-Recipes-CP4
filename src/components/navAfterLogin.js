@@ -55,8 +55,13 @@ class Nav extends Component {
       </button>
 
       <div id="yummyrecipesNavbar" className="collapse navbar-collapse">
-      <form className="form-inline">
-        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+      <form className="form-inline" onSubmit={(e) =>{
+        e.preventDefault()
+        this.props.search(e)}
+      } >
+
+        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+          onChange={this.props.setSearchValue}/>
         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
 
