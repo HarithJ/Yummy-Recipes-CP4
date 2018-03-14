@@ -19,28 +19,28 @@ class Recipes extends Component {
       }
       else {
         this.setState({searchedRecipe: nextProps.searchValue})
-        this.getSearchedRecipes();
+        this.getSearchedRecipes(nextProps.searchValue);
       }
     }
   }
 
   componentDidMount() {
     if (this.props.searchValue === '') {
-      this.getAllRecipes();
+      this.getAllRecipes(this.props.pagination);
     }
     else {
       this.setState({searchedRecipe: this.props.searchValue})
-      this.getSearchedRecipes();
+      this.getSearchedRecipes(this.props.pagination);
     }
   }
 
-  getSearchedRecipes = () => {
+  getSearchedRecipes = (toBeSearched) => {
     var access_token = localStorage.getItem('accessToken');
     access_token = access_token.replace(/['"]+/g, '')
 
     var headers = {Authorization: `Bearer ${access_token}`}
 
-    axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?q=${this.state.searchedRecipe}`, {headers})
+    axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?q=${toBeSearched}`, {headers})
       .then((response) => {
       let key = Object.keys(response.data)[0]
       this.setState({
@@ -95,10 +95,6 @@ class Recipes extends Component {
     });
   }
 
-  handleEdit = () => {
-
-  }
-
   render() {
     if (this.state.alertMsg.display) {
       return(
@@ -107,7 +103,7 @@ class Recipes extends Component {
       </div>);
     }
     return(
-      this.state.recipes.map(recipe => <Recipe handleDelete={this.handleDelete} {...recipe}/>)
+      this.state.recipes.map(recipe => <Recipe categoryId={this.props.categoryId} handleDelete={this.handleDelete} {...recipe}/>)
     );
   }
 }

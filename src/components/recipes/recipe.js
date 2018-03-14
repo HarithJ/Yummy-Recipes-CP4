@@ -13,7 +13,7 @@ class Recipe extends Component {
                 <h3 className="recipetitle">{this.props.title}</h3>
               </div>
 
-              <EditRecipe recipeTitle={this.props.title} recipeIngs={this.props.ingredients}
+                <EditRecipe categoryId={this.props.categoryId} recipeId={this.props.id} recipeTitle={this.props.title} recipeIngs={this.props.ingredients}
                 recipeDirections={this.props.directions}/>
 
               <div className="col-auto">

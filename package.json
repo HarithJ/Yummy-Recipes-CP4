@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "mobx": "^4.0.1",
+    "mobx-react": "^5.0.0",
     "query-string": "^5.1.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

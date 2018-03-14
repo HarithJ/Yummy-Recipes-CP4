@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 class Ingredients extends Component {
-
-  numberOfIng = () => {
-
-  }
   render() {
     return(
       <li>
@@ -24,13 +21,18 @@ class EditRecipe extends Component {
       recipeDirections: ''
     };
   }
-  componentDidMount() {
-    this.setState({
+
+  initialState = () => {
+    return this.setState({
       recipeTitle: this.props.recipeTitle,
       recipeDirections: this.props.recipeDirections,
       ings: this.props.recipeIngs,
       numberOfIngs: this.props.recipeIngs.length
     })
+  }
+
+  componentDidMount() {
+    this.initialState();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,6 +75,34 @@ class EditRecipe extends Component {
     })
   }
 
+  handleEditRecipe = (event) => {
+    event.preventDefault();
+    var access_token = localStorage.getItem('accessToken');
+    access_token = access_token.replace(/['"]+/g, '');
+
+    var headers = {Authorization: `Bearer ${access_token}`};
+
+    let recipeData = {};
+    recipeData['title'] = this.state.recipeTitle;
+    for (let i = 0; i < this.state.numberOfIngs; i++) {
+      recipeData[`ingredient${i+1}`] = this.state.ings[i];
+    }
+    recipeData['directions'] = this.state.recipeDirections;
+
+    axios({
+      method: 'put',
+      url: `http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe/${this.props.recipeId}`,
+      headers: headers,
+      data: recipeData
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.log(error.response.data.message, 'alert-danger');
+    });
+  }
+
   render() {
     const ingsList = this.state.ings.map((ing, index)=>{
       let value;
@@ -89,17 +119,17 @@ class EditRecipe extends Component {
 
         <div className="col-auto">
           <button type="button" className="btn btn-outline-warning rounded-circle"
-             data-toggle="modal" data-target="#edit-recipe-modal">
+             data-toggle="modal" data-target={`#edit-recipe-modal-${this.props.recipeTitle}`}>
               <i class="fas fa-pencil-alt"></i>
           </button>
         </div>
 
-        <div class="modal fade" id="edit-recipe-modal" tabindex="-1" role="dialog" aria-labelledby="editRecipeModal" aria-hidden="true">
+        <div class="modal fade" id={`edit-recipe-modal-${this.props.recipeTitle}`} tabindex="-1" role="dialog" aria-labelledby="editRecipeModal" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
 
-                <form name="addrecipeForm" id="add-recipe-modal-form"
-                  onSubmit={this.handleAddRecipe}>
+                <form name="editrecipeForm" id="edit-recipe-modal-form"
+                  onSubmit={this.handleEditRecipe}>
 
                   <div class="modal-header">
                     <input type="text" class="form-control recipetitle" name="recipetitle" placeholder="Recipe Title"
@@ -137,7 +167,7 @@ class EditRecipe extends Component {
                   </div>
 
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button onClick={this.initialState} type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary" onClick={this.clearInputs}>Save changes</button>
                   </div>
                 </form>

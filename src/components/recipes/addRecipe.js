@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 class Ingredients extends Component {
-
-  numberOfIng = () => {
-
-  }
   render() {
     return(
       <li>

@@ -6,6 +6,7 @@ import queryString from 'query-string'
 import Nav from '../navAfterLogin'
 import AddRecipe from './addRecipe.js'
 import Recipes from './recipes.js'
+import Pagination from './pagination.js'
 
 class RecipePage extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class RecipePage extends Component {
 
   setSearchValue = (event) => {
     this.setState({
-      searchValue: event.target.value
+      searchValue: event.target.value,
+      pagination: 1
     })
     if (event.target.value) {
       this.props.history.push(`/${this.props.match.params.id}/recipes?q=${event.target.value}`)
@@ -37,7 +39,8 @@ class RecipePage extends Component {
         <Nav search={this.search} setSearchValue={this.setSearchValue.bind(this)}/>
         <div class="container-fluid mt-3">
           <AddRecipe categoryId={categoryId}/>
-          <Recipes searchValue={this.state.searchValue} categoryId={categoryId}/>
+          <Recipes pagination={this.state.pagination} searchValue={this.state.searchValue} categoryId={categoryId}/>
+          <Pagination />
         </div>
       </div>
     );
