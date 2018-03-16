@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { CSSTransitionGroup } from 'react-transition-group'
 
 import Nav from '../nav.js';
 import Header from '../header.js';

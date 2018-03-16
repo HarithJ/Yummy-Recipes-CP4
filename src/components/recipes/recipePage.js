@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Redirect } from 'react-router'
-import queryString from 'query-string'
+import { BrowserRouter as Link } from "react-router-dom";
 import axios from 'axios';
 
 import Nav from '../navAfterLogin'
@@ -53,7 +51,7 @@ class RecipePage extends Component {
       }))
     }
     else{
-      pageNumber = parseInt(pageNumber)
+      pageNumber = parseInt(pageNumber, 10)
       this.setState((prevState) => ({
         pagination: {
           limit: prevState.pagination.limit,
@@ -75,7 +73,7 @@ class RecipePage extends Component {
       }))
     }
     else {
-      limitNumber = parseInt(limitNumber)
+      limitNumber = parseInt(limitNumber, 10)
       this.setState((prevState) => ({
         pagination: {
           limit: limitNumber,

@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Nav from './navAfterLogin.js';
 import Alert from './alert.js'
-import {Redirect} from 'react-router'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Pagination from './recipes/pagination'
 
@@ -117,7 +116,7 @@ class Category extends Component {
             <div className="col-auto">
               <button className="btn btn-outline-warning rounded-circle"
                 onClick={() => this.props.setCategoryToEdit(this.props.id)}>
-                  <i class="fas fa-pencil-alt"></i>
+                  <i className="fas fa-pencil-alt"></i>
               </button>
             </div>
 
@@ -292,7 +291,7 @@ class Categories extends Component {
       }))
     }
     else{
-      pageNumber = parseInt(pageNumber)
+      pageNumber = parseInt(pageNumber, 10)
       this.setState((prevState) => ({
         pagination: {
           limit: prevState.pagination.limit,
@@ -315,7 +314,7 @@ class Categories extends Component {
       }))
     }
     else {
-      limitNumber = parseInt(limitNumber)
+      limitNumber = parseInt(limitNumber, 10)
       this.setState((prevState) => ({
         pagination: {
           limit: limitNumber,

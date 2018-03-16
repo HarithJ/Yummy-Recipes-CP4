@@ -15,7 +15,7 @@ class Pagination extends Component {
     let pages = [];
     for (let i = 0; i < this.props.pagination.totalPages; i++) {
       pages.push(
-        <li className="page-item">
+        <li key={i} className="page-item">
           <input type="button" value={i+1}
             onClick={(e) => this.props.changePage(e.target.value)}
             className="page-link" />
@@ -28,7 +28,7 @@ class Pagination extends Component {
         <nav className="fixed-bottom mr-1  justify-content-end" aria-label="Page navigation example">
           <ul className="pagination justify-content-end">
             <li className={"page-item " + this.isPreviousDisabled()}>
-              <input type="button" value="Previous" onClick={(e) => this.props.changePage(e.target.value)} className="page-link" tabindex="-1" />
+              <input type="button" value="Previous" onClick={(e) => this.props.changePage(e.target.value)} className="page-link" tabIndex="-1" />
             </li>
             {pages}
             <li className={"page-item " + this.isNextDisabled()}>

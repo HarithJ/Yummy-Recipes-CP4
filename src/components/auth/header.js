@@ -11,10 +11,10 @@ class Header extends Component {
           <h1 className="text-center">Yummy Recipes</h1>
         </div>
         <div className="col-3 header-img1">
-          <img src={recipe} className="img-fluid img-thumbnail" style={{transform: 'rotate(20deg)'}} />
+          <img alt="" src={recipe} className="img-fluid img-thumbnail" style={{transform: 'rotate(20deg)'}} />
         </div>
         <div className="col-3 align-self-center header-img2">
-          <img src={food} className="img-fluid img-thumbnail text-right" />
+          <img alt="" src={food} className="img-fluid img-thumbnail text-right" />
         </div>
       </div>
     );
