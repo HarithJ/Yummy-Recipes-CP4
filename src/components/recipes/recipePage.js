@@ -5,9 +5,9 @@ import queryString from 'query-string'
 import axios from 'axios';
 
 import Nav from '../navAfterLogin'
-import AddRecipe from './addRecipe.js'
 import Recipes from './recipes.js'
 import Pagination from './pagination.js'
+import Alert from '../alert.js'
 
 class RecipePage extends Component {
   constructor(props) {
@@ -15,7 +15,8 @@ class RecipePage extends Component {
     this.state = {
       searchValue: '',
       search: false,
-      pagination: {limit: 0, page: 1, totalPages: 1}
+      pagination: {limit: 0, page: 1, totalPages: 1},
+      alertMsg: {display: false, msg: '', classes: ''}
     }
     this.setSearchValue = this.setSearchValue.bind(this)
   }
@@ -114,6 +115,13 @@ class RecipePage extends Component {
       })
   }
 
+  setAlertMsg = (msg, type) => {
+    this.setState({alertMsg: {display: true, msg: msg, classes: type}})
+  }
+  hideAlert = () => {
+    this.setState({alertMsg: {display: false}})
+  }
+
   render() {
     let categoryId = this.props.match.params.id;
 
@@ -121,9 +129,16 @@ class RecipePage extends Component {
       <div>
         <Nav search={this.search} setSearchValue={this.setSearchValue.bind(this)}/>
         <div class="container-fluid mt-3">
-          <AddRecipe categoryId={categoryId}/>
-          <Recipes pagination={this.state.pagination} searchValue={this.state.searchValue} categoryId={categoryId}/>
+          {
+            this.state.alertMsg.display &&
+            <Alert hideAlert={this.hideAlert} alertType={this.state.alertMsg.classes} alertMsg={this.state.alertMsg.msg} />
+          }
+
+          <Recipes setAlertMsg={this.setAlertMsg} pagination={this.state.pagination} searchValue={this.state.searchValue} categoryId={categoryId}/>
           <Pagination pagination={this.state.pagination} changeLimit={this.changeLimit} changePage={this.changePage}/>
+          <Link to='/categories'>
+          <i class="btn-success fas fa-arrow-alt-circle-left" style={{position: "fixed", top: "50%", fontSize: "2.5em"}}></i>
+          </Link>
         </div>
       </div>
     );

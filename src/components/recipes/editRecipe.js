@@ -96,10 +96,11 @@ class EditRecipe extends Component {
       data: recipeData
     })
     .then((response) => {
-      console.log(response.data);
+      this.props.getRecipes();
+      this.props.setAlertMsg(response.data.message, 'alert-success')
     })
     .catch((error) => {
-      console.log(error.response.data.message, 'alert-danger');
+      this.props.setAlertMsg(error.response.data.message, 'alert-danger')
     });
   }
 
@@ -128,15 +129,14 @@ class EditRecipe extends Component {
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
 
-                <form name="editrecipeForm" id="edit-recipe-modal-form"
-                  onSubmit={this.handleEditRecipe}>
+                <form name="editrecipeForm" id="edit-recipe-modal-form">
 
                   <div class="modal-header">
                     <input type="text" class="form-control recipetitle" name="recipetitle" placeholder="Recipe Title"
                     value={this.state.recipeTitle}
                     onChange={(event) => this.setState({recipeTitle: event.target.value})}/>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button onClick={this.initialState} type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
@@ -168,7 +168,7 @@ class EditRecipe extends Component {
 
                   <div class="modal-footer">
                     <button onClick={this.initialState} type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" onClick={this.clearInputs}>Save changes</button>
+                    <button type="submit" class="btn btn-primary" onClick={(e) => {this.clearInputs(); this.handleEditRecipe(e);}} data-dismiss="modal">Save changes</button>
                   </div>
                 </form>
 

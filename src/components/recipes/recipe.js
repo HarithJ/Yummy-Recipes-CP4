@@ -13,8 +13,8 @@ class Recipe extends Component {
                 <h3 className="recipetitle">{this.props.title}</h3>
               </div>
 
-                <EditRecipe categoryId={this.props.categoryId} recipeId={this.props.id} recipeTitle={this.props.title} recipeIngs={this.props.ingredients}
-                recipeDirections={this.props.directions}/>
+                <EditRecipe getRecipes={this.props.getRecipes} categoryId={this.props.categoryId} recipeId={this.props.id} recipeTitle={this.props.title} recipeIngs={this.props.ingredients}
+                recipeDirections={this.props.directions} setAlertMsg={this.props.setAlertMsg}/>
 
               <div className="col-auto">
                 <button className="btn btn-outline-danger rounded-circle"
@@ -43,8 +43,6 @@ class Recipe extends Component {
                 <p className="directions">{this.props.directions}</p>
               </div>
             </div>
-
-
 
           </div>
         </div>

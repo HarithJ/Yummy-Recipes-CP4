@@ -48,6 +48,15 @@ class AddRecipe extends Component {
     })
   }
 
+  initialState = () => {
+    return this.setState({
+      numberOfIngs: 0,
+      ings: [],
+      recipeTitle: '',
+      recipeDirections: ''
+    })
+  }
+
   handleAddRecipe = (event) => {
     event.preventDefault();
     var access_token = localStorage.getItem('accessToken');
@@ -69,10 +78,12 @@ class AddRecipe extends Component {
       data: recipeData
     })
     .then((response) => {
-      console.log(response.data);
+      this.props.getRecipes();
+      this.initialState();
+      this.props.setAlertMsg(response.data.message, 'alert-success');
     })
     .catch((error) => {
-      console.log(error.response.data.message, 'alert-danger');
+      this.props.setAlertMsg(error.response.data.message, 'alert-danger');
     });
   }
 
@@ -97,8 +108,7 @@ class AddRecipe extends Component {
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
 
-                <form name="addrecipeForm" id="add-recipe-modal-form"
-                  onSubmit={this.handleAddRecipe}>
+                <form name="addrecipeForm" id="add-recipe-modal-form">
 
                   <div class="modal-header">
                     <input type="text" class="form-control recipetitle" name="recipetitle" placeholder="Recipe Title"
@@ -137,7 +147,7 @@ class AddRecipe extends Component {
 
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" onClick={this.clearInputs}>Save changes</button>
+                    <button type="submit" class="btn btn-primary" onClick={ (e) => {this.clearInputs(); this.handleAddRecipe(e)} } data-dismiss="modal">Save changes</button>
                   </div>
                 </form>
 
