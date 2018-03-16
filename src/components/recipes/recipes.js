@@ -13,13 +13,14 @@ class Recipes extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(JSON.stringify(this.props.searchValue) !== JSON.stringify(nextProps.searchValue)){
+    if(JSON.stringify(this.props) !== JSON.stringify(nextProps)){
       if (nextProps.searchValue === '') {
-        this.getAllRecipes();
+        console.log(nextProps.pagination);
+        this.getAllRecipes(nextProps.pagination);
       }
       else {
         this.setState({searchedRecipe: nextProps.searchValue})
-        this.getSearchedRecipes(nextProps.searchValue);
+        this.getSearchedRecipes(nextProps.searchValue, nextProps.pagination);
       }
     }
   }
@@ -30,50 +31,87 @@ class Recipes extends Component {
     }
     else {
       this.setState({searchedRecipe: this.props.searchValue})
-      this.getSearchedRecipes(this.props.pagination);
+      this.getSearchedRecipes(this.props.searchValue, this.props.pagination);
     }
   }
 
-  getSearchedRecipes = (toBeSearched) => {
+  getSearchedRecipes = (toBeSearched, pagination) => {
     var access_token = localStorage.getItem('accessToken');
     access_token = access_token.replace(/['"]+/g, '')
 
     var headers = {Authorization: `Bearer ${access_token}`}
 
-    axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?q=${toBeSearched}`, {headers})
-      .then((response) => {
-      let key = Object.keys(response.data)[0]
-      this.setState({
-        alertMsg: {display: false, msg: ''},
-        recipes: response.data[key]
-      })
-    })
-      .catch((error) => {
+    if (pagination.limits > 0) {
+      axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?q=${toBeSearched}&limit=${pagination.limit}&page=${pagination.page}`, {headers})
+        .then((response) => {
+        let key = Object.keys(response.data)[0]
         this.setState({
-          alertMsg: {display: true, msg: error.response.data.message}
+          alertMsg: {display: false, msg: ''},
+          recipes: response.data[key]
         })
       })
+        .catch((error) => {
+          this.setState({
+            alertMsg: {display: true, msg: error.response.data.message}
+          })
+        })
+    }
+
+    else {
+      axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?q=${toBeSearched}`, {headers})
+        .then((response) => {
+        let key = Object.keys(response.data)[0]
+        this.setState({
+          alertMsg: {display: false, msg: ''},
+          recipes: response.data[key]
+        })
+      })
+        .catch((error) => {
+          this.setState({
+            alertMsg: {display: true, msg: error.response.data.message}
+          })
+        })
+    }
+
   }
 
-  getAllRecipes = () => {
+  getAllRecipes = (pagination) => {
     var access_token = localStorage.getItem('accessToken');
     access_token = access_token.replace(/['"]+/g, '')
 
     var headers = {Authorization: `Bearer ${access_token}`}
 
-    axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe`, {headers})
-      .then((response) => {
-      let key = Object.keys(response.data)[0]
-      this.setState({
-        alertMsg: {display: false, msg: ''},
-        recipes: response.data[key]
-      })
-    })
-      .catch((error) => {
+    if (pagination.limit > 0) {
+      axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?limit=${pagination.limit}&page=${pagination.page}`, {headers})
+        .then((response) => {
+        let key = Object.keys(response.data)[0]
         this.setState({
-          alertMsg: {display: true, msg: error.response.data.message}
+          alertMsg: {display: false, msg: ''},
+          recipes: response.data[key]
         })
       })
+        .catch((error) => {
+          this.setState({
+            alertMsg: {display: true, msg: error.response.data.message}
+          })
+        })
+    }
+
+    else {
+      axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe`, {headers})
+        .then((response) => {
+        let key = Object.keys(response.data)[0]
+        this.setState({
+          alertMsg: {display: false, msg: ''},
+          recipes: response.data[key]
+        })
+      })
+        .catch((error) => {
+          this.setState({
+            alertMsg: {display: true, msg: error.response.data.message}
+          })
+        })
+    }
   }
 
   handleDelete = (recipeId) => {
