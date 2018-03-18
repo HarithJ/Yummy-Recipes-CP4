@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Redirect } from 'react-router'
 import axios from 'axios'
 
+import Alert from '../../alert.js'
+
 class RegistrationForm extends Component {
   constructor(props){
     super(props);
@@ -11,7 +13,8 @@ class RegistrationForm extends Component {
       userName: '',
       email: '',
       password: '',
-      redirect: false
+      redirect: false,
+      alert: {display: false, msg: '', type: ''}
     }
   }
 
@@ -32,8 +35,14 @@ class RegistrationForm extends Component {
     })
     .catch((error) => {
       this.setState({
-        redirect: true
+        alert: {display: true, msg: error.response.data.message, type:'alert-danger'}
       })
+    })
+  }
+
+  hideAlert = () => {
+    this.setState({
+      alert: {display: false, msg: '', type:''}
     })
   }
 
@@ -45,6 +54,11 @@ class RegistrationForm extends Component {
       <div className="container-fluid mTop">
           <h5 className="text-primary">Register Now!</h5>
           <form onSubmit={this.handleRegistration}>
+            {
+              this.state.alert.display &&
+
+              <Alert hideAlert={this.hideAlert} alertType={this.state.alert.type} alertMsg={this.state.alert.msg} />
+            }
 
               <div className="form-group row">
                   <label for="inputName" className="col-sm-2 col-form-label">Name*</label>
@@ -89,13 +103,13 @@ class RegistrationForm extends Component {
               </div>
 
               <div className="form-group row">
-                  <label for="inputPassword" className="col-sm-2 col-form-label"
-                  value={this.state.password}
-                  onChange={(event) => this.setState({
-                    password: event.target.value
-                  })}>Password*</label>
+                  <label for="inputPassword" className="col-sm-2 col-form-label">Password*</label>
                   <div className="col-sm-10">
-                      <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password" />
+                      <input type="password" className="form-control" id="inputPassword" placeholder="Password" name="password"
+                      value={this.state.password}
+                      onChange={(event) => this.setState({
+                        password: event.target.value
+                      })} />
                   </div>
               </div>
 
