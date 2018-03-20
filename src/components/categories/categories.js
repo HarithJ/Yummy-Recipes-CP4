@@ -1,142 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import Nav from './navAfterLogin.js';
-import Alert from './alert.js'
-import { Link } from "react-router-dom";
+import Nav from '../navAfterLogin.js';
+import Alert from '../alert.js'
+import { Redirect } from "react-router-dom";
 
-import Pagination from './recipes/pagination'
-
-class CategoryEditForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categoryName: '',
-      categoryId: ''
-    }
-  }
-
-  componentWillMount() {
-    this.setState({
-      categoryName: this.props.categoryName,
-      categoryId: this.props.categoryId
-    })
-  }
-
-  handleEditing = (event) => {
-    event.preventDefault();
-
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
-    axios({
-      method: 'put',
-      url: `http://localhost:5000/api/v1.0/categories/category/${this.state.categoryId}`,
-      headers: headers,
-      data: {
-        name: this.state.categoryName
-      }
-    })
-    .then((response) => {
-      this.props.setAlertMsg(response.data.message, 'alert-success');
-      this.props.setCategoryToEdit(0);
-      this.props.categoriesModified();
-    })
-    .catch((error) => {
-      this.props.setAlertMsg(error.response.data.message, 'alert-danger');
-    });
-  }
-
-  render() {
-    return(
-      <form onSubmit={this.handleEditing}>
-        <div className="row justify-content-center">
-          <div className="col-4">
-            <input type="text" className="form-control validate"
-              value={this.state.categoryName}
-              onChange={(event) => this.setState({
-                categoryName: event.target.value
-              })}/>
-          </div>
-          <div className="col-auto">
-            <button type="submit" className="btn btn-warning">Edit Category</button>
-          </div>
-          <div className="col-auto">
-            <button className="btn btn-primary" onClick={() => this.props.setCategoryToEdit(0)}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      </form>
-  )
-  }
-}
-
-class Category extends Component {
-  handleDelete = (event) => {
-    event.preventDefault();
-
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
-    axios({
-      method: 'delete',
-      url: `http://localhost:5000/api/v1.0/categories/category/${this.props.id}`,
-      headers: headers,
-      data: {
-        name: this.props.Name
-      }
-    })
-    .then((response) => {
-      this.props.setAlertMsg(response.data.message, 'alert-success');
-      this.props.categoriesModified();
-    })
-    .catch((error) => {
-      this.props.setAlertMsg(error.response.data.message, 'alert-danger');
-    });
-  }
-  render() {
-    if(this.props.editing) {
-      return(
-        <CategoryEditForm categoriesModified={this.props.categoriesModified} setAlertMsg={this.props.setAlertMsg} setCategoryToEdit={this.props.setCategoryToEdit} categoryName={this.props.Name} categoryId={this.props.id}/>
-      )
-    }
-    else {
-      return (
-        <div>
-          <div className="row justify-content-center">
-
-            <div className="col-7">
-              <h4><Link to={`${this.props.id}/recipes`}>{this.props.Name}</Link></h4>
-            </div>
-
-            <div className="col-auto">
-              <button className="btn btn-outline-warning rounded-circle"
-                onClick={() => this.props.setCategoryToEdit(this.props.id)}>
-                  <i className="fas fa-pencil-alt"></i>
-              </button>
-            </div>
-
-            <div className="col-auto">
-              <button className="btn btn-outline-danger rounded-circle"
-                onClick={this.handleDelete}>
-                <i className="far fa-trash-alt"></i>
-              </button>
-            </div>
-
-          </div>
-          <br />
-        </div>
-      );
-    }
-
-  }
-}
-
-
+import Category from './category.js'
+import Pagination from '../pagination'
 
 class Categories extends Component {
   constructor(props){
@@ -154,10 +23,10 @@ class Categories extends Component {
   }
 
   getCategories = () => {
-    var access_token = localStorage.getItem('accessToken');
+    let access_token = localStorage.getItem('accessToken');
     access_token = access_token.replace(/['"]+/g, '')
 
-    var headers = {Authorization: `Bearer ${access_token}`}
+    let headers = {Authorization: `Bearer ${access_token}`}
 
     let pagination = this.state.pagination
 
@@ -171,8 +40,10 @@ class Categories extends Component {
           }))
         })
           .catch((error) => {
-            console.log("error");
-            this.setState({redirect: true})
+            let errorMsg = error.response.data.message
+            if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+              this.setState({redirect: true})
+            }
           })
       }
 
@@ -185,8 +56,10 @@ class Categories extends Component {
           }))
         })
           .catch((error) => {
-            console.log("error");
-            this.setState({redirect: true})
+            let errorMsg = error.response.data.message
+            if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+              this.setState({redirect: true})
+            }
           })
       }
     }
@@ -201,8 +74,10 @@ class Categories extends Component {
           }))
         })
           .catch((error) => {
-            console.log("error");
-            this.setState({redirect: true})
+            let errorMsg = error.response.data.message
+            if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+              this.setState({redirect: true})
+            }
           })
       }
 
@@ -215,8 +90,10 @@ class Categories extends Component {
           }))
         })
           .catch((error) => {
-            console.log("error");
-            this.setState({redirect: true})
+            let errorMsg = error.response.data.message
+            if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+              this.setState({redirect: true})
+            }
           })
       }
     }
@@ -235,10 +112,10 @@ class Categories extends Component {
   handleAddCategory = (event) => {
     event.preventDefault();
 
-    var access_token = localStorage.getItem('accessToken');
+    let access_token = localStorage.getItem('accessToken');
     access_token = access_token.replace(/['"]+/g, '')
 
-    var headers = {Authorization: `Bearer ${access_token}`}
+    let headers = {Authorization: `Bearer ${access_token}`}
 
     axios({
       method: 'post',
@@ -254,7 +131,11 @@ class Categories extends Component {
       this.categoriesModified();
     })
     .catch((error) => {
-      this.setAlertMsg(error.response.data.message, 'alert-danger');
+      let errorMsg = error.response.data.message
+      if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+        this.setState({redirect: true})
+      }
+      this.setAlertMsg(errorMsg, 'alert-danger');
     });
   }
 
@@ -328,10 +209,10 @@ class Categories extends Component {
   }
 
   setTotalPageNumbers = () => {
-    var access_token = localStorage.getItem('accessToken');
+    let access_token = localStorage.getItem('accessToken');
     access_token = access_token.replace(/['"]+/g, '')
 
-    var headers = {Authorization: `Bearer ${access_token}`}
+    let headers = {Authorization: `Bearer ${access_token}`}
 
     axios.get('http://localhost:5000/api/v1.0/categories/category', {headers})
       .then((response) => {
@@ -349,8 +230,12 @@ class Categories extends Component {
       }))
     })
       .catch((error) => {
+        let errorMsg = error.response.data.message
+        if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+          this.setState({redirect: true})
+        }
         this.setState({
-          alertMsg: {display: true, msg: error.response.data.message}
+          alertMsg: {display: true, msg: errorMsg}
         })
       })
   }
@@ -363,6 +248,9 @@ class Categories extends Component {
   }
 
   render() {
+    if(this.state.redirect === true){
+      return <Redirect to='/login' />
+    }
     if (this.state.categoriesGotten === false)
     {
       this.getCategories();
@@ -395,11 +283,13 @@ class Categories extends Component {
         <br />
 
         {this.state.categories.map(category => {
-          var editing = false;
+          let editing = false;
           if (category.id === this.state.categoryToEdit) {
             editing = true;
           }
-          return <Category categoriesModified={this.categoriesModified} setAlertMsg={this.setAlertMsg} editing={editing} setCategoryToEdit={this.setCategoryToEdit} key={category.id} {...category} />
+          return <Category categoriesModified={this.categoriesModified} setAlertMsg={this.setAlertMsg}
+                    editing={editing} setCategoryToEdit={this.setCategoryToEdit} key={category.id}
+                    {...category} />
         })}
 
       </div>

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`alert alert msg  renders properly 1`] = `
+<div
+  className="text-center alert alert-success"
+  role="alert"
+>
+  A message to test testing
+</div>
+`;

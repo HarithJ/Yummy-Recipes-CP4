@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`category module renders properly 1`] = `
+<div>
+  <div
+    className="row justify-content-center"
+  >
+    <div
+      className="col-7"
+    >
+      <h4>
+        <Link
+          replace={false}
+          to="undefined/recipes"
+        />
+      </h4>
+    </div>
+    <div
+      className="col-auto"
+    >
+      <button
+        className="btn btn-outline-warning rounded-circle"
+        onClick={[Function]}
+      >
+        <i
+          className="fas fa-pencil-alt"
+        />
+      </button>
+    </div>
+    <div
+      className="col-auto"
+    >
+      <button
+        className="btn btn-outline-danger rounded-circle"
+        onClick={[Function]}
+      >
+        <i
+          className="far fa-trash-alt"
+        />
+      </button>
+    </div>
+  </div>
+  <br />
+</div>
+`;

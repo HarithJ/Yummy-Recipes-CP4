@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login form component renders properly 1`] = `
+<div
+  className="container-fluid mTop"
+>
+  <div
+    className="row justify-content-center"
+  >
+    <form
+      className="col-sm-6"
+      onSubmit={[Function]}
+    >
+      <CSSTransitionGroup
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnter={true}
+        transitionEnterTimeout={500}
+        transitionLeave={true}
+        transitionLeaveTimeout={500}
+        transitionName="example"
+      />
+      <h5
+        className="text-secondary"
+      >
+        Sign in!!!
+      </h5>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="inputName"
+        >
+          Name
+        </label>
+        <input
+          aria-describedby="emailHelp"
+          className="form-control"
+          id="inputName"
+          name="name"
+          onChange={[Function]}
+          placeholder="Enter name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor="inputPassword"
+        >
+          Password
+        </label>
+        <input
+          className="form-control"
+          id="inputPassword"
+          name="password"
+          onChange={[Function]}
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="row justify-content-end"
+      >
+        <div
+          className="col-auto"
+        >
+          <button
+            className="btn btn-primary"
+            type="submit"
+          >
+            Sign in
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+`;

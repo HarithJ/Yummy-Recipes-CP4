@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`recipe page component renders properly 1`] = `
+<div>
+  <Nav
+    setSearchValue={[Function]}
+  />
+  <div
+    class="container-fluid mt-3"
+  >
+    <Recipes
+      pagination={
+        Object {
+          "limit": 0,
+          "page": 1,
+          "totalPages": 1,
+        }
+      }
+      searchValue=""
+      setAlertMsg={[Function]}
+    />
+    <Pagination
+      changeLimit={[Function]}
+      changePage={[Function]}
+      pagination={
+        Object {
+          "limit": 0,
+          "page": 1,
+          "totalPages": 1,
+        }
+      }
+    />
+    <Link
+      replace={false}
+      to="/categories"
+    >
+      <i
+        class="btn-success fas fa-arrow-alt-circle-left"
+        style={
+          Object {
+            "fontSize": "2.5em",
+            "position": "fixed",
+            "top": "50%",
+          }
+        }
+      />
+    </Link>
+  </div>
+</div>
+`;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Recipe from './recipe.js';
 import axios from 'axios';
+import { Redirect } from "react-router-dom";
 
 import AddRecipe from './addRecipe.js'
 
@@ -8,7 +9,8 @@ class Recipes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipes: []
+      recipes: [],
+      redirect: false
     };
   }
 
@@ -53,8 +55,12 @@ class Recipes extends Component {
         })
       })
         .catch((error) => {
+          let errorMsg = error.response.data.message
+          if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+            this.setState({redirect: true})
+          }
           this.setState({
-            alertMsg: {display: true, msg: error.response.data.message}
+            alertMsg: {display: true, msg: errorMsg}
           })
         })
     }
@@ -69,8 +75,12 @@ class Recipes extends Component {
         })
       })
         .catch((error) => {
+          let errorMsg = error.response.data.message
+          if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+            this.setState({redirect: true})
+          }
           this.setState({
-            alertMsg: {display: true, msg: error.response.data.message}
+            alertMsg: {display: true, msg: errorMsg}
           })
         })
     }
@@ -92,8 +102,12 @@ class Recipes extends Component {
         })
       })
         .catch((error) => {
+          let errorMsg = error.response.data.message
+          if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+            this.setState({redirect: true})
+          }
           this.setState({
-            alertMsg: {display: true, msg: error.response.data.message}
+            alertMsg: {display: true, msg: errorMsg}
           })
         })
     }
@@ -107,8 +121,12 @@ class Recipes extends Component {
         })
       })
         .catch((error) => {
+          let errorMsg = error.response.data.message
+          if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+            this.setState({redirect: true})
+          }
           this.setState({
-            alertMsg: {display: true, msg: error.response.data.message}
+            alertMsg: {display: true, msg: errorMsg}
           })
         })
     }
@@ -131,11 +149,18 @@ class Recipes extends Component {
       this.props.setAlertMsg(response.data.message, 'alert-success')
     })
     .catch((error) => {
-      this.props.setAlertMsg(error.response.data.message, 'alert-danger')
+      let errorMsg = error.response.data.message
+      if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+        this.setState({redirect: true})
+      }
+      this.props.setAlertMsg(errorMsg, 'alert-danger')
     });
   }
 
   render() {
+    if(this.state.redirect){
+      return <Redirect to="/login" />
+    }
     return(
       <div>
       <AddRecipe getRecipes={this.getRecipes} setAlertMsg={this.props.setAlertMsg} categoryId={this.props.categoryId}/>

@@ -22,7 +22,6 @@ class Pagination extends Component {
         </li>
       )
     }
-    console.log(pages);
     return(
       <div>
         <nav className="fixed-bottom mr-1  justify-content-end" aria-label="Page navigation example">
@@ -35,11 +34,11 @@ class Pagination extends Component {
               <input type="button" value="Next" onClick={(e) => this.props.changePage(e.target.value)} className="page-link" />
             </li>
             <select onChange={(e) => this.props.changeLimit(e.target.options[e.target.selectedIndex].text)}>
-              <option>All</option>
-              <option>1</option>
-              <option>10</option>
-              <option>20</option>
-              <option>30</option>
+              <option value="0">All</option>
+              <option value="1">1</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
             </select>
           </ul>
         </nav>

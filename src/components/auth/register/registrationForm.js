@@ -63,14 +63,14 @@ class RegistrationForm extends Component {
               <div className="form-group row">
                   <label for="inputName" className="col-sm-2 col-form-label">Name*</label>
                   <div className="col">
-                    <input type="text" className="form-control" placeholder="First name"
+                    <input id="inputFirstName" type="text" className="form-control" placeholder="First name"
                     value={this.state.firstName}
                     onChange={(event) => this.setState({
                       firstName: event.target.value
                     })} />
                   </div>
                   <div className="col">
-                    <input type="text" className="form-control" placeholder="Last name"
+                    <input id="inputLastName" type="text" className="form-control" placeholder="Last name"
                     value={this.state.lastName}
                     onChange={(event) => this.setState({
                       lastName: event.target.value
@@ -81,7 +81,7 @@ class RegistrationForm extends Component {
               <div className="form-group row">
                   <label for="userName" className="col-sm-2 col-form-label">User Name*</label>
                   <div className="col">
-                    <input type="text" className="form-control" placeholder="User Name"
+                    <input id="inputUsername" type="text" className="form-control" placeholder="User Name"
                     value={this.state.userName}
                     onChange={(event) => this.setState({
                       userName: event.target.value

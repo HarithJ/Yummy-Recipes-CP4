@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from 'axios';
 
 import Nav from '../navAfterLogin'
 import Recipes from './recipes.js'
-import Pagination from './pagination.js'
+import Pagination from '../pagination.js'
 import Alert from '../alert.js'
 
 class RecipePage extends Component {
@@ -14,7 +14,8 @@ class RecipePage extends Component {
       searchValue: '',
       search: false,
       pagination: {limit: 0, page: 1, totalPages: 1},
-      alertMsg: {display: false, msg: '', classes: ''}
+      alertMsg: {display: false, msg: '', classes: ''},
+      redirect: false
     }
     this.setSearchValue = this.setSearchValue.bind(this)
   }
@@ -107,8 +108,12 @@ class RecipePage extends Component {
       }))
     })
       .catch((error) => {
+        let errorMsg = error.response.data.message
+        if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+          this.setState({redirect: true})
+        }
         this.setState({
-          alertMsg: {display: true, msg: error.response.data.message}
+          alertMsg: {display: true, msg: errorMsg}
         })
       })
   }
@@ -121,6 +126,9 @@ class RecipePage extends Component {
   }
 
   render() {
+    if(this.state.redirect){
+      return <Redirect to="/login" />
+    }
     let categoryId = this.props.match.params.id;
 
     return(

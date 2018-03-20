@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pagination component renders properly 1`] = `
+<div>
+  <nav
+    aria-label="Page navigation example"
+    className="fixed-bottom mr-1  justify-content-end"
+  >
+    <ul
+      className="pagination justify-content-end"
+    >
+      <li
+        className="page-item undefined"
+      >
+        <input
+          className="page-link"
+          onClick={[Function]}
+          tabIndex="-1"
+          type="button"
+          value="Previous"
+        />
+      </li>
+      <li
+        className="page-item"
+        key="0"
+      >
+        <input
+          className="page-link"
+          onClick={[Function]}
+          type="button"
+          value={1}
+        />
+      </li>
+      <li
+        className="page-item"
+        key="1"
+      >
+        <input
+          className="page-link"
+          onClick={[Function]}
+          type="button"
+          value={2}
+        />
+      </li>
+      <li
+        className="page-item"
+        key="2"
+      >
+        <input
+          className="page-link"
+          onClick={[Function]}
+          type="button"
+          value={3}
+        />
+      </li>
+      <li
+        className="page-item undefined"
+      >
+        <input
+          className="page-link"
+          onClick={[Function]}
+          type="button"
+          value="Next"
+        />
+      </li>
+      <select
+        onChange={[Function]}
+      >
+        <option
+          value="0"
+        >
+          All
+        </option>
+        <option
+          value="1"
+        >
+          1
+        </option>
+        <option
+          value="10"
+        >
+          10
+        </option>
+        <option
+          value="20"
+        >
+          20
+        </option>
+        <option
+          value="30"
+        >
+          30
+        </option>
+      </select>
+    </ul>
+  </nav>
+</div>
+`;

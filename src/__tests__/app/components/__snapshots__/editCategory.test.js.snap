@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`category module renders properly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div
+    className="row justify-content-center"
+  >
+    <div
+      className="col-4"
+    >
+      <input
+        className="form-control validate"
+        onChange={[Function]}
+        type="text"
+      />
+    </div>
+    <div
+      className="col-auto"
+    >
+      <button
+        className="btn btn-warning"
+        type="submit"
+      >
+        Edit Category
+      </button>
+    </div>
+    <div
+      className="col-auto"
+    >
+      <button
+        className="btn btn-primary"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
+`;

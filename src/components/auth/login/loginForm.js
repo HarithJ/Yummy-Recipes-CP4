@@ -27,6 +27,7 @@ class LoginForm extends Component {
       })
       .then((response) => {
         localStorage.setItem("accessToken", response.data.access_token);
+        localStorage.setItem("user", response.data.user);
 
         this.setState({
           redirect: true

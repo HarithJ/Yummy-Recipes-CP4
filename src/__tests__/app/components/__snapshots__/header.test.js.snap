@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`header component renders properly 1`] = `
+<div
+  className="row header"
+>
+  <div
+    className="col-4 align-self-center header-text"
+  >
+    <h1
+      className="text-center"
+    >
+      Yummy Recipes
+    </h1>
+  </div>
+  <div
+    className="col-3 header-img1"
+  >
+    <img
+      alt=""
+      className="img-fluid img-thumbnail"
+      src="recipe.jpg"
+      style={
+        Object {
+          "transform": "rotate(20deg)",
+        }
+      }
+    />
+  </div>
+  <div
+    className="col-3 align-self-center header-img2"
+  >
+    <img
+      alt=""
+      className="img-fluid img-thumbnail text-right"
+      src="food.jpg"
+    />
+  </div>
+</div>
+`;

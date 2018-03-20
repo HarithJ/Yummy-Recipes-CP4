@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`register component renders properly 1`] = `
+<div>
+  <Nav
+    link="/login"
+    linkTitle="Login"
+  />
+  <Header />
+  <RegistrationForm />
+</div>
+`;

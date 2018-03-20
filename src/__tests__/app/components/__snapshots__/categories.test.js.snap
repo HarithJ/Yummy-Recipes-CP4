@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`category module renders properly 1`] = `
+<div>
+  <Nav
+    setSearchValue={[Function]}
+  />
+  <div
+    className="container-fluid mt-3"
+  >
+    <br />
+    <form
+      action="/addcategory/"
+      method="Post"
+      name="addcategoryForm"
+      onSubmit={[Function]}
+    >
+      <div
+        className="row justify-content-center"
+      >
+        <div
+          className="col-4"
+        >
+          <input
+            className="form-control validate"
+            name="category_name"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          className="col-auto"
+        >
+          <button
+            className="btn btn-success"
+            type="submit"
+          >
+            Add Category
+          </button>
+        </div>
+      </div>
+    </form>
+    <br />
+  </div>
+  <Pagination
+    changeLimit={[Function]}
+    changePage={[Function]}
+    pagination={
+      Object {
+        "limit": 0,
+        "page": 1,
+        "totalPages": 1,
+      }
+    }
+  />
+</div>
+`;

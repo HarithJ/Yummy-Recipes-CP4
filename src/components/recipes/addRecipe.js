@@ -100,27 +100,27 @@ class AddRecipe extends Component {
     });
     return(
       <div>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-recipe-modal">
+        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#add-recipe-modal">
           Add Recipe
         </button>
 
-        <div class="modal fade" id="add-recipe-modal" tabindex="-1" role="dialog" aria-labelledby="addRecipeModal" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
+        <div className="modal fade" id="add-recipe-modal" tabIndex="-1" role="dialog" aria-labelledby="addRecipeModal" aria-hidden="true">
+          <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-content">
 
                 <form name="addrecipeForm" id="add-recipe-modal-form">
 
-                  <div class="modal-header">
-                    <input type="text" class="form-control recipetitle" name="recipetitle" placeholder="Recipe Title"
+                  <div className="modal-header">
+                    <input type="text" className="form-control recipetitle" name="recipetitle" placeholder="Recipe Title"
                     value={this.state.recipeTitle}
                     onChange={(event) => this.setState({recipeTitle: event.target.value})}/>
 
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
 
-                  <div class="modal-body">
+                  <div className="modal-body">
 
 
                     <h4>Ingredients</h4>
@@ -128,16 +128,16 @@ class AddRecipe extends Component {
                       {ingsList}
                     </ul>
                     <button type="button" className="col-auto btn btn-primary" onClick={this.handleAddIng}>
-                      <i class="fas fa-plus"></i>
+                      <i className="fas fa-plus"></i>
                     </button>
                     <button type="button" className="col-auto btn btn-warning" onClick={this.clearInputs}>
                       clear
                     </button>
 
                     <h4>Directions</h4>
-                    <div class="row">
-                      <div class="col-12">
-                        <textarea class="form-control directions" name="directions" rows="3"
+                    <div className="row">
+                      <div className="col-12">
+                        <textarea className="form-control directions" name="directions" rows="3"
                         value={this.state.recipeDirections}
                         onChange={(event) => this.setState({recipeDirections: event.target.value})}></textarea>
                       </div>
@@ -145,9 +145,9 @@ class AddRecipe extends Component {
 
                   </div>
 
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" onClick={ (e) => {this.clearInputs(); this.handleAddRecipe(e)} } data-dismiss="modal">Save changes</button>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" className="btn btn-primary" onClick={ (e) => {this.clearInputs(); this.handleAddRecipe(e)} } data-dismiss="modal">Save changes</button>
                   </div>
                 </form>
 

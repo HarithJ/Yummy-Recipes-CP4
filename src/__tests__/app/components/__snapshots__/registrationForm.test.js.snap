@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`registration form component renders properly 1`] = `
+<div
+  className="container-fluid mTop"
+>
+  <h5
+    className="text-primary"
+  >
+    Register Now!
+  </h5>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group row"
+    >
+      <label
+        className="col-sm-2 col-form-label"
+        for="inputName"
+      >
+        Name*
+      </label>
+      <div
+        className="col"
+      >
+        <input
+          className="form-control"
+          id="inputFirstName"
+          onChange={[Function]}
+          placeholder="First name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="col"
+      >
+        <input
+          className="form-control"
+          id="inputLastName"
+          onChange={[Function]}
+          placeholder="Last name"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="form-group row"
+    >
+      <label
+        className="col-sm-2 col-form-label"
+        for="userName"
+      >
+        User Name*
+      </label>
+      <div
+        className="col"
+      >
+        <input
+          className="form-control"
+          id="inputUsername"
+          onChange={[Function]}
+          placeholder="User Name"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="form-group row"
+    >
+      <label
+        className="col-sm-2 col-form-label"
+        for="inputEmail"
+      >
+        Email address*
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          aria-describedby="emailHelp"
+          className="form-control"
+          id="inputEmail"
+          name="email"
+          onChange={[Function]}
+          placeholder="Enter email"
+          type="email"
+          value=""
+        />
+      </div>
+      <small
+        className="form-text text-muted col-sm-6"
+        id="emailHelp"
+      >
+        We'll never share your email with anyone else.
+      </small>
+    </div>
+    <div
+      className="form-group row"
+    >
+      <label
+        className="col-sm-2 col-form-label"
+        for="inputPassword"
+      >
+        Password*
+      </label>
+      <div
+        className="col-sm-10"
+      >
+        <input
+          className="form-control"
+          id="inputPassword"
+          name="password"
+          onChange={[Function]}
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+      </div>
+    </div>
+    <button
+      className="btn btn-primary"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;

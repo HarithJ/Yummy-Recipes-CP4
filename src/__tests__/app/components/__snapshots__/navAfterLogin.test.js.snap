@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`nav after login component renders properly 1`] = `
+<nav
+  className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between"
+>
+  <span
+    className="navbar-brand mb-0 h2 header-text"
+    style={
+      Object {
+        "color": "#eee8aa",
+      }
+    }
+  >
+    Yummy
+    <br />
+    Recipes
+  </span>
+  <button
+    aria-controls="yummyrecipesNavbar"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    className="navbar-toggler"
+    data-target="#yummyrecipesNavbar"
+    data-toggle="collapse"
+    type="button"
+  >
+    <span
+      className="navbar-toggler-icon"
+    />
+  </button>
+  <div
+    className="collapse navbar-collapse"
+    id="yummyrecipesNavbar"
+  >
+    <form
+      className="form-inline"
+      onSubmit={[Function]}
+    >
+      <input
+        aria-label="Search"
+        className="form-control mr-sm-2"
+        placeholder="Search"
+        type="search"
+      />
+      <button
+        className="btn btn-outline-success my-2 my-sm-0"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+    <button
+      className="btn btn-outline-warning ml-auto"
+      onClick={[Function]}
+      type="button"
+    >
+      Sign Out
+    </button>
+  </div>
+</nav>
+`;

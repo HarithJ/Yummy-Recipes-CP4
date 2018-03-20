@@ -42,6 +42,7 @@ class Nav extends Component {
     if (this.state.redirect) {
       return <Redirect to='/login' />
     }
+    let user = localStorage.getItem('user')
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
       <span className="navbar-brand mb-0 h2 header-text" style={{color: "#eee8aa"}}>
@@ -65,7 +66,11 @@ class Nav extends Component {
         <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
 
-        <button type="button" className="btn btn-outline-warning ml-auto" onClick={this.handleLogout}>Sign Out</button>
+        <span className="navbar-text ml-auto text-light">
+        Welcome, {user}
+      </span>
+
+        <button type="button" className="btn btn-outline-warning ml-3" onClick={this.handleLogout}>Sign Out</button>
 
       </div>
     </nav>

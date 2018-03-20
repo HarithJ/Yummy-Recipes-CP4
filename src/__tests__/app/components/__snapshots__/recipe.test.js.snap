@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe component renders properly 1`] = `
+<div
+  className="row justify-content-center recipe"
+>
+  <div
+    className="col-10"
+  >
+    <hr />
+    <div
+      className="row"
+    >
+      <div
+        className="col-10"
+      >
+        <h3
+          className="recipetitle"
+        />
+      </div>
+      <EditRecipe
+        recipeIngs={Array []}
+      />
+      <div
+        className="col-auto"
+      >
+        <button
+          className="btn btn-outline-danger rounded-circle"
+          onClick={[Function]}
+        >
+          <i
+            className="far fa-trash-alt"
+          />
+        </button>
+      </div>
+    </div>
+    <div
+      className="row"
+    >
+      <div
+        className="col-sm-3"
+      >
+        <h5>
+          Ingredients
+        </h5>
+        <ul />
+      </div>
+      <div
+        className="col-sm-9"
+      >
+        <h5>
+          Directions
+        </h5>
+        <p
+          className="directions"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
