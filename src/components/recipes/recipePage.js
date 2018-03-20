@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Link, Redirect } from "react-router-dom";
-import axios from 'axios';
+import axiosSettings from '../../axiosSettings.js';
 
 import Nav from '../navAfterLogin'
 import Recipes from './recipes.js'
@@ -8,6 +8,28 @@ import Pagination from '../pagination.js'
 import Alert from '../alert.js'
 
 class RecipePage extends Component {
+  /*
+   * This component is the entire page of recipes, it consists of:
+   * Nav component, alert msg, Recipes component, Pagination Component & a button that links
+   * back to category page.
+   *
+   * State:
+   * searchValue >
+   * search > boolean (not needed anymore)
+   * pagination > dictionary consisting of; limit > the number of recipes to view on a page,
+                  page > , totalPages > the number of pages recipes have
+   * alertMsg > dictionary; display > boolean, msg > message to display as alert, classes >
+                  (bootstrap classes for the type of alert)
+   * redirect > bool that gets set to tru if the user is unauthenticated.
+   *
+   * Functions:
+   * setSearchValue > takes in event as arg.
+   * changePage > takes in pageNumber as arg.
+   * changeLimit > takes in limit number as arg.
+   * setTotalPageNumbers > gets all the recipes, then it does the math.
+   * setAlertMsg > takes in msg and type (bootstrap) as arg, and sets the state of alertMsg.
+   * hideAlert > changes the state of alertMsg.display to false.
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -87,12 +109,7 @@ class RecipePage extends Component {
   }
 
   setTotalPageNumbers = () => {
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
-    axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.match.params.id}/recipe`, {headers})
+    axiosSettings.get(`recipes/category/${this.props.match.params.id}/recipe`)
       .then((response) => {
       let key = Object.keys(response.data)[0]
       let totalRecipes = response.data[key].length

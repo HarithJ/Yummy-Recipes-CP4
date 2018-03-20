@@ -1,7 +1,24 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import axiosSettings from '../../axiosSettings.js'
 
 class Ingredients extends Component {
+  /*
+   * It renders a modal which contains input fields, which are filled with the previous values
+   * the user had entered for the recipe, allowing the user to edit with ease.
+   *
+   * State:
+   * numberOfIngs > number of ingredients in the recipes
+   * ings > list of Ingredients
+   * recipeTitle >
+   * recipeDirections >
+   *
+   * Functions:
+   * initialState > sets the state to the recipe that was stored.
+   * handleAddIng > it updates the state when a user clicks on the add ing btn
+   * handleChange > it updates the ings state, correctly modifying the ing user edits
+   * clearInputs > it removes empty inputs of ings
+   * handleEditRecipe > it makes an axios request.
+   */
   render() {
     return(
       <li>
@@ -77,10 +94,6 @@ class EditRecipe extends Component {
 
   handleEditRecipe = (event) => {
     event.preventDefault();
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '');
-
-    var headers = {Authorization: `Bearer ${access_token}`};
 
     let recipeData = {};
     recipeData['title'] = this.state.recipeTitle;
@@ -89,10 +102,9 @@ class EditRecipe extends Component {
     }
     recipeData['directions'] = this.state.recipeDirections;
 
-    axios({
+    axiosSettings({
       method: 'put',
-      url: `http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe/${this.props.recipeId}`,
-      headers: headers,
+      url: `recipes/category/${this.props.categoryId}/recipe/${this.props.recipeId}`,
       data: recipeData
     })
     .then((response) => {

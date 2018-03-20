@@ -1,11 +1,28 @@
 import React, {Component} from 'react';
 import Recipe from './recipe.js';
-import axios from 'axios';
 import { Redirect } from "react-router-dom";
+import axiosSettings from '../../axiosSettings.js';
 
 import AddRecipe from './addRecipe.js'
 
 class Recipes extends Component {
+  /*
+   * This component is used to get all recipes, depending on whether
+   * a search or pagination params were provided or not.
+   * After getting recipes and storing them inside the state,
+   * it renders Recipe component passing in each and every recipe.
+   *
+   * State:
+   * recipes > its a list of recipes gotten from api.
+   * redirect > its a boolean value, which gets set to false if a user is not logged in.
+   *
+   * Props:
+   * Pagination > its a dictionary which contains; limit, pageNumber, totalPages.
+   * setAlertMsg > a function on parent component, takes in 2 args; msg and type of msg (alert-success, alert-danger)
+   *                (see bootstrap for type of alert msgs)
+   * searchValue.
+   * categoryId > used to retrieve recipes in that category.
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -40,13 +57,8 @@ class Recipes extends Component {
   }
 
   getSearchedRecipes = (toBeSearched, pagination) => {
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
     if (pagination.limits > 0) {
-      axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?q=${toBeSearched}&limit=${pagination.limit}&page=${pagination.page}`, {headers})
+      axiosSettings.get(`recipes/category/${this.props.categoryId}/recipe?q=${toBeSearched}&limit=${pagination.limit}&page=${pagination.page}`)
         .then((response) => {
         let key = Object.keys(response.data)[0]
         this.setState({
@@ -66,7 +78,7 @@ class Recipes extends Component {
     }
 
     else {
-      axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?q=${toBeSearched}`, {headers})
+      axiosSettings.get(`recipes/category/${this.props.categoryId}/recipe?q=${toBeSearched}`)
         .then((response) => {
         let key = Object.keys(response.data)[0]
         this.setState({
@@ -88,13 +100,8 @@ class Recipes extends Component {
   }
 
   getAllRecipes = (pagination) => {
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
     if (pagination.limit > 0) {
-      axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe?limit=${pagination.limit}&page=${pagination.page}`, {headers})
+      axiosSettings.get(`recipes/category/${this.props.categoryId}/recipe?limit=${pagination.limit}&page=${pagination.page}`)
         .then((response) => {
         let key = Object.keys(response.data)[0]
         this.setState({
@@ -113,7 +120,7 @@ class Recipes extends Component {
     }
 
     else {
-      axios.get(`http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe`, {headers})
+      axiosSettings.get(`recipes/category/${this.props.categoryId}/recipe`)
         .then((response) => {
         let key = Object.keys(response.data)[0]
         this.setState({
@@ -134,15 +141,9 @@ class Recipes extends Component {
   }
 
   handleDelete = (recipeId) => {
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
-    axios({
+    axiosSettings({
       method: 'delete',
-      url: `http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe/${recipeId}`,
-      headers: headers
+      url: `recipes/category/${this.props.categoryId}/recipe/${recipeId}`
     })
     .then((response) => {
       this.getRecipes()

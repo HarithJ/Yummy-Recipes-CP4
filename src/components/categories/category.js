@@ -1,22 +1,19 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import { Link } from "react-router-dom";
+import axiosSettings from '../../axiosSettings.js'
 
 import CategoryEditForm from './editCategory.js'
 
 class Category extends Component {
+  /*
+   * Display each category if it is not set to be edited, else it displays CategoryEditForm component instead.
+   * It also handles deleting a category.
+   */
   handleDelete = (event) => {
     event.preventDefault();
-
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
-    axios({
+    axiosSettings({
       method: 'delete',
-      url: `http://localhost:5000/api/v1.0/categories/category/${this.props.id}`,
-      headers: headers,
+      url: `categories/category/${this.props.id}`,
       data: {
         name: this.props.Name
       }

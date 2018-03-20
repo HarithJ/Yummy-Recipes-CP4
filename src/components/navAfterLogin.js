@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import { Redirect } from 'react-router';
+import axiosSettings from '../axiosSettings.js'
 
 class Nav extends Component {
+  /*
+   * Nav bar that gets called after a user logs in. It also has a logout button and a func to handle logout.
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -13,15 +16,9 @@ class Nav extends Component {
   handleLogout = (event) => {
     event.preventDefault();
 
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
-    axios({
+    axiosSettings({
       method: 'get',
-      url: `http://localhost:5000/api/v1.0/auth/logout`,
-      headers: headers
+      url: `auth/logout`
     })
       .then((response) => {
         localStorage.setItem("accessToken", '');

@@ -1,13 +1,38 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import Nav from '../navAfterLogin.js';
 import Alert from '../alert.js'
 import { Redirect } from "react-router-dom";
+import axiosSettings from '../../axiosSettings.js'
 
 import Category from './category.js'
 import Pagination from '../pagination'
 
 class Categories extends Component {
+  /*
+   * Main component that holds the entire category page. It has: Navbar, alert msg, form to add a category,
+   * Category component, & pagination component.
+   *
+   * State:
+   * categories > list of categories,
+   * categoriesGotten > bool that gets sets to false whenever there is a need to update categories,
+   * categoryToEdit > holds the id of a category that need to be edited,
+   * categoryToAdd > holds the name of a category that user wants to add,
+   * searchValue > holds the value from search box,
+   * alertMsg: {display: false, msg: '', className: ''},
+   * redirect > true if user is unauthenticated,
+   * pagination: {limit: 0, page: 1, totalPages: 1}
+   *
+   * getCategories > makes axios to get categories request depending on pagination and search value.
+   * setCategoryToEdit > takes in categoryId as arg, and sets the state of categoryToEdit
+   * categoriesModified > sets the state of categoriesGotten to false, it gets called when there is a change in categories and page needs update.
+   * handleAddCategory > makes axios request to add category
+   * setSearchValue > sets state
+   * changePage >
+   * changeLimit >
+   * setTotalPageNumbers >
+   * setAlertMsg >
+   * hideAlert > 
+   */
   constructor(props){
     super(props);
     this.state = {
@@ -23,16 +48,11 @@ class Categories extends Component {
   }
 
   getCategories = () => {
-    let access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    let headers = {Authorization: `Bearer ${access_token}`}
-
     let pagination = this.state.pagination
 
     if (this.state.searchValue === '') {
       if (pagination.limit > 0) {
-        return axios.get(`http://localhost:5000/api/v1.0/categories/category?limit=${pagination.limit}&page=${pagination.page}`, {headers})
+        return axiosSettings.get(`categories/category?limit=${pagination.limit}&page=${pagination.page}`)
           .then((response) => {
           this.setState((prevState) => ({
             categories: response.data.categories,
@@ -48,7 +68,7 @@ class Categories extends Component {
       }
 
       else {
-        return axios.get('http://localhost:5000/api/v1.0/categories/category', {headers})
+        return axiosSettings.get('categories/category')
           .then((response) => {
           this.setState((prevState) => ({
             categories: response.data.categories,
@@ -66,7 +86,7 @@ class Categories extends Component {
 
     else {
       if (pagination.limit > 0) {
-        return axios.get(`http://localhost:5000/api/v1.0/categories/category?q=${this.state.searchValue}&limit=${pagination.limit}&page=${pagination.page}`, {headers})
+        return axiosSettings.get(`categories/category?q=${this.state.searchValue}&limit=${pagination.limit}&page=${pagination.page}`)
           .then((response) => {
           this.setState((prevState) => ({
             categories: response.data.categories,
@@ -82,7 +102,7 @@ class Categories extends Component {
       }
 
       else {
-        return axios.get(`http://localhost:5000/api/v1.0/categories/category?q=${this.state.searchValue}`, {headers})
+        return axiosSettings.get(`categories/category?q=${this.state.searchValue}`)
           .then((response) => {
           this.setState((prevState) => ({
             categories: response.data.categories,
@@ -112,15 +132,9 @@ class Categories extends Component {
   handleAddCategory = (event) => {
     event.preventDefault();
 
-    let access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    let headers = {Authorization: `Bearer ${access_token}`}
-
-    axios({
+    axiosSettings({
       method: 'post',
-      url: `http://localhost:5000/api/v1.0/categories/category`,
-      headers: headers,
+      url: `categories/category`,
       data: {
         name: this.state.categoryToAdd
       }
@@ -209,12 +223,7 @@ class Categories extends Component {
   }
 
   setTotalPageNumbers = () => {
-    let access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    let headers = {Authorization: `Bearer ${access_token}`}
-
-    axios.get('http://localhost:5000/api/v1.0/categories/category', {headers})
+    axiosSettings.get('categories/category')
       .then((response) => {
       let key = Object.keys(response.data)[0]
       let totalRecipes = response.data[key].length

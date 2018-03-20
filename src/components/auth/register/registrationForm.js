@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Redirect } from 'react-router'
-import axios from 'axios'
+import axiosSettings from '../../../axiosSettings.js'
 
 import Alert from '../../alert.js'
 
@@ -21,7 +21,7 @@ class RegistrationForm extends Component {
   handleRegistration = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:5000/api/v1.0/auth/register', {
+    axiosSettings.post('auth/register', {
       first_name: this.state.firstName,
       last_name: this.state.lastName,
       username: this.state.userName,

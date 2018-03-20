@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 class Alert extends Component {
+  /*
+   * Displays alert msg using props: this.props.alertType (bootsrap alert type e.g alert-success), this.props.alertMsg.
+   * It calls hideAlert func which it gets from props after 5 secs.
+   */
   componentDidMount() {
     this.timerID = setInterval(
       () => this.hide(),

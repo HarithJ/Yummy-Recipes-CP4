@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import { CSSTransitionGroup } from 'react-transition-group'
 import { Redirect } from 'react-router'
+import axiosSettings from '../../../axiosSettings.js'
 
 import Alert from '../../alert.js'
 
@@ -21,7 +21,7 @@ class LoginForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:5000/api/v1.0/auth/login', {
+    axiosSettings.post('auth/login', {
       email: this.state.email,
       password: this.state.password
       })

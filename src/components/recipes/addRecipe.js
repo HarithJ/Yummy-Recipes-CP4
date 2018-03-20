@@ -1,7 +1,23 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import axiosSettings from '../../axiosSettings.js'
 
 class Ingredients extends Component {
+  /*
+   * It renders a modal that has input fields for the user to enter in the recipe details.
+   *
+   * State:
+   * numberOfIngs > number of ingredients in the recipes
+   * ings > list of Ingredients
+   * recipeTitle >
+   * recipeDirections >
+   *
+   * Functions:
+   * initialState > sets the state to the recipe that was stored.
+   * handleAddIng > it updates the state when a user clicks on the add ing btn
+   * handleChange > it updates the ings state, correctly modifying the ing user edits
+   * clearInputs > it removes empty inputs of ings
+   * handleAddRecipe > it makes an axios request.
+   */
   render() {
     return(
       <li>
@@ -59,10 +75,6 @@ class AddRecipe extends Component {
 
   handleAddRecipe = (event) => {
     event.preventDefault();
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '');
-
-    var headers = {Authorization: `Bearer ${access_token}`};
 
     let recipeData = {};
     recipeData['title'] = this.state.recipeTitle;
@@ -71,10 +83,9 @@ class AddRecipe extends Component {
     }
     recipeData['directions'] = this.state.recipeDirections;
 
-    axios({
+    axiosSettings({
       method: 'post',
-      url: `http://localhost:5000/api/v1.0/recipes/category/${this.props.categoryId}/recipe`,
-      headers: headers,
+      url: `recipes/category/${this.props.categoryId}/recipe`,
       data: recipeData
     })
     .then((response) => {

@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import axiosSettings from '../../axiosSettings.js'
 
 class CategoryEditForm extends Component {
+  /*
+   * Displays a form for editing a catgeory which already has a value  of previous category.
+   * It also makes an axios request to edit a category.
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -20,15 +24,9 @@ class CategoryEditForm extends Component {
   handleEditing = (event) => {
     event.preventDefault();
 
-    var access_token = localStorage.getItem('accessToken');
-    access_token = access_token.replace(/['"]+/g, '')
-
-    var headers = {Authorization: `Bearer ${access_token}`}
-
-    axios({
+    axiosSettings({
       method: 'put',
-      url: `http://localhost:5000/api/v1.0/categories/category/${this.state.categoryId}`,
-      headers: headers,
+      url: `categories/category/${this.state.categoryId}`,
       data: {
         name: this.state.categoryName
       }
