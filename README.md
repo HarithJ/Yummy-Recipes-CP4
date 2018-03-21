@@ -1,3 +1,9 @@
+[![Build Status](https://travis-ci.org/HarithJ/Yummy-Recipes-CP4.svg?branch=master)](https://travis-ci.org/HarithJ/Yummy-Recipes-CP4)
+[![Coverage Status](https://coveralls.io/repos/github/HarithJ/Yummy-Recipes-CP4/badge.svg?branch=master)](https://coveralls.io/github/HarithJ/Yummy-Recipes-CP4?branch=master)
+
+# Yummy Recipes
+Is all about storing your favourite recipes so that they don't get lost! It uses API from http://yummy-recipes-ch3-harith.herokuapp.com/api/v1.0/. 
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
