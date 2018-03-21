@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import EditRecipe from './editRecipe.js'
 
 const Recipe = (props) => {
