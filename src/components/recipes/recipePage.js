@@ -34,7 +34,6 @@ class RecipePage extends Component {
     super(props);
     this.state = {
       searchValue: '',
-      search: false,
       pagination: {limit: 0, page: 1, totalPages: 1},
       alertMsg: {display: false, msg: '', classes: ''},
       redirect: false
@@ -150,7 +149,7 @@ class RecipePage extends Component {
 
     return(
       <div>
-        <Nav search={this.search} setSearchValue={this.setSearchValue.bind(this)}/>
+        <Nav setSearchValue={this.setSearchValue.bind(this)}/>
         <div class="container-fluid mt-3">
           {
             this.state.alertMsg.display &&
