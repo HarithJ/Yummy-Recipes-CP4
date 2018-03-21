@@ -6,4 +6,7 @@ cache:
     - node_modules
 script:
   - npm run build
-  - npm test
+  - npm test -- -u --coverage
+
+after_success:
+  - coveralls < coverage/lcov.info
