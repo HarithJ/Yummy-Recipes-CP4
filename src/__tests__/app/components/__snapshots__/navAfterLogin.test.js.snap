@@ -33,25 +33,19 @@ exports[`nav after login component renders properly 1`] = `
     className="collapse navbar-collapse"
     id="yummyrecipesNavbar"
   >
-    <form
-      className="form-inline"
-      onSubmit={[Function]}
+    <input
+      aria-label="Search"
+      className="col-auto form-control mr-sm-2"
+      placeholder="Search"
+      type="search"
+    />
+    <span
+      className="navbar-text ml-auto text-light"
     >
-      <input
-        aria-label="Search"
-        className="form-control mr-sm-2"
-        placeholder="Search"
-        type="search"
-      />
-      <button
-        className="btn btn-outline-success my-2 my-sm-0"
-        type="submit"
-      >
-        Search
-      </button>
-    </form>
+      Welcome, 
+    </span>
     <button
-      className="btn btn-outline-warning ml-auto"
+      className="btn btn-outline-warning ml-3"
       onClick={[Function]}
       type="button"
     >
