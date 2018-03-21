@@ -68,7 +68,7 @@ class Recipes extends Component {
       })
         .catch((error) => {
           let errorMsg = error.response.data.message
-          if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+          if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
             this.setState({redirect: true})
           }
           this.setState({
@@ -88,7 +88,7 @@ class Recipes extends Component {
       })
         .catch((error) => {
           let errorMsg = error.response.data.message
-          if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+          if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
             this.setState({redirect: true})
           }
           this.setState({
@@ -110,7 +110,7 @@ class Recipes extends Component {
       })
         .catch((error) => {
           let errorMsg = error.response.data.message
-          if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+          if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
             this.setState({redirect: true})
           }
           this.setState({
@@ -129,7 +129,7 @@ class Recipes extends Component {
       })
         .catch((error) => {
           let errorMsg = error.response.data.message
-          if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+          if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
             this.setState({redirect: true})
           }
           this.setState({
@@ -151,7 +151,7 @@ class Recipes extends Component {
     })
     .catch((error) => {
       let errorMsg = error.response.data.message
-      if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+      if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
         this.setState({redirect: true})
       }
       this.props.setAlertMsg(errorMsg, 'alert-danger')

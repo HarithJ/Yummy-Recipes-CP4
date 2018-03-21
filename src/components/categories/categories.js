@@ -31,7 +31,7 @@ class Categories extends Component {
    * changeLimit >
    * setTotalPageNumbers >
    * setAlertMsg >
-   * hideAlert > 
+   * hideAlert >
    */
   constructor(props){
     super(props);
@@ -61,7 +61,7 @@ class Categories extends Component {
         })
           .catch((error) => {
             let errorMsg = error.response.data.message
-            if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+            if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token") || errorMsg.includes("token")) {
               this.setState({redirect: true})
             }
           })
@@ -77,7 +77,7 @@ class Categories extends Component {
         })
           .catch((error) => {
             let errorMsg = error.response.data.message
-            if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+            if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
               this.setState({redirect: true})
             }
           })
@@ -95,7 +95,7 @@ class Categories extends Component {
         })
           .catch((error) => {
             let errorMsg = error.response.data.message
-            if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+            if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
               this.setState({redirect: true})
             }
           })
@@ -111,7 +111,7 @@ class Categories extends Component {
         })
           .catch((error) => {
             let errorMsg = error.response.data.message
-            if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+            if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
               this.setState({redirect: true})
             }
           })
@@ -140,7 +140,6 @@ class Categories extends Component {
       }
     })
     .then((response) => {
-      console.log(response.data);
       this.setAlertMsg("Category successfully added", 'alert-success');
       this.categoriesModified();
     })
@@ -240,7 +239,7 @@ class Categories extends Component {
     })
       .catch((error) => {
         let errorMsg = error.response.data.message
-        if(errorMsg.includes("login") || errorMsg.includes("Bearer")) {
+        if(errorMsg.includes("login") || errorMsg.includes("Bearer") || errorMsg.includes("token")) {
           this.setState({redirect: true})
         }
         this.setState({
