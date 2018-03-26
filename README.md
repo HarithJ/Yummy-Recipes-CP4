@@ -5,7 +5,7 @@
 # Yummy Recipes
 Is all about storing your favourite recipes so that they don't get lost! It uses API from http://yummy-recipes-ch3-harith.herokuapp.com/api/v1.0/.
 
-Start using the app at: yummy-recipes-cp4-harith.herokuapp.com
+Start using the app at: http://yummy-recipes-cp4-harith.herokuapp.com
 
 ## Want to add in some value??
 This app was built using React, to add some value to it, make sure you have npm or yarn package installed. Then clone this repo and install the requirements using either: 
